@@ -1,0 +1,12 @@
+<div class="container">
+    <ul class="nav">
+        <li class="nav-item">
+            <a class="nav-link" href="{% url 'news' %}">Всички новини</a>
+        </li>
+        {% for category in categories %}
+        <li class="nav-item">
+            <a class="nav-link" href="?category={{category}}">{{category}}</a>
+        </li>
+        {% endfor %}
+    </ul>
+</div>

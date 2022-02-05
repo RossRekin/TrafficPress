@@ -1,0 +1,53 @@
+{% extends 'main.html'%}
+
+
+{% block content %}
+
+{% include 'news/categories_component.html'%}
+
+
+<div class="container">
+    {% if categeory_query %}
+    <h2 class="text-center mb-4">{{categeory_query}}</h2>
+    {% else %}
+    <h2 class="text-center mb-4">Всички новини</h2>
+    {% endif %}
+</div>
+
+
+
+<div class="container">
+    <div class="row">
+        {% for article in articles %}
+
+        <div class="col-3">
+            <div class="card border-0">
+                <a href="{% url 'single-article' article.id %}">
+                    <img class="card-img-top" src="{{article.featured_image.url}}" alt="Card image cap"
+                        style="max-height: 200px; object-fit: cover;">
+                </a>
+                <div class="card-body">
+                    <h5 class="card-title"><a href="{% url 'single-article' article.id %}"
+                            style="text-decoration: none; color: inherit;">{{article.title}}</a></h5>
+                    <p class="card-text">автор: {{article.author}}</p>
+                    <p class="card-text">{{article.body|slice:"0:50"}}...</p>
+
+                </div>
+                {% if request.user.is_authenticated and request.user == article.author %}
+                <div class="card-body">
+                    <a href="{% url 'update-article' article.id %}" class="card-link">Edit</a>
+                    <a href="{% url 'delete-article' article.id %}" class="card-link">Delete</a>
+                </div>
+                {% endif %}
+            </div>
+
+        </div>
+
+        {% endfor %}
+    </div>
+</div>
+
+
+
+
+{% endblock content %}

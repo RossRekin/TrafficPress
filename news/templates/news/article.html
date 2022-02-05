@@ -1,0 +1,21 @@
+{% extends 'main.html'%}
+{% load static %}
+
+{% block content %}
+
+{% include 'news/categories_component.html'%}
+
+<div class="container">
+
+    <h1>{{article.title}}</h1>
+    <p class="lead">
+        {{article.created}}
+    </p>
+    <img src="{{article.featured_image.url}}" class="img-fluid">
+    <p class="lead">
+        Автор: {{article.author}}
+    </p>
+
+    <p>{{article.body}}</p>
+
+    {% endblock content %}
